@@ -13,39 +13,29 @@ env:
 
 jobs:
     unit-testing:
-            runs-on: Ubuntu-latest
-            steps:
-              - name: Checkout Code
-                uses: actions/checkout@v4
-              
-              - name: Install NodeJS
-                uses: actions/setup-node@v4
-                with:
-                  node-version: '20'
+        name: Unit Testing
+        strategy:
+          matrix:
+            node-version: ['18','19','20']
+            os-version: [ubuntu-latest, macos-latest]
+        runs-on: ${{matrix.os-version}}
+        steps:
+          - name: Checkout Code
+            uses: actions/checkout@v4
+          
+          - name: Install NodeJS on ${{matrix.node-version}}
+            uses: actions/setup-node@v4
+            with:
+              node-version: ${{matrix.node-version}}
 
-              - name: Install Dependencies
-                run: npm install
+          - name: Install Dependencies
+            run: npm install
 
-              - name: Run Unit Tests
-                run: npm test
-              
-              - name: Upload Articraft
-                uses: actions/upload-artifact@v4
-                with:
-                  name: Mocha Test Results
-                  path: test-results.xml
-
-
-
-              
-
-            
-              
-              
-                
-
-            
-            
-
-            
-              
+          - name: Run Unit Tests
+            run: npm test
+          
+          - name: Upload Articraft
+            uses: actions/upload-artifact@v4
+            with:
+              name: Mocha Test Results
+              path: test-results.xml
