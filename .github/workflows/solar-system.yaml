@@ -31,11 +31,6 @@ jobs:
             uses: actions/setup-node@v4
             with:
               node-version: ${{matrix.node-version}}
-          
-          - name: GITHUB-Context
-            env: 
-              GITHUB_CONTEXT: ${{toJson(github)}}
-            run: echo $GITHUB_CONTEXT
 
           - name: Install Dependencies
             run: npm install
@@ -46,5 +41,5 @@ jobs:
           - name: Upload Articraft
             uses: actions/upload-artifact@v4
             with:
-              name: Mocha-Test-Result-${{github.run_id}}
+              name: Mocha-Test-Result-${{matrix.node-version}}-${{matrix.os-version}}
               path: test-results.xml
