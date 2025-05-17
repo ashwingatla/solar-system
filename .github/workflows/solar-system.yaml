@@ -18,6 +18,10 @@ jobs:
           matrix:
             node-version: ['18','19','20']
             os-version: [ubuntu-latest, macos-latest]
+            excludes:
+              - node-version: 18
+                os-version: macos-latest
+          fail-fast: true
         runs-on: ${{matrix.os-version}}
         steps:
           - name: Checkout Code
