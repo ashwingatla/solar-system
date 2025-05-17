@@ -21,7 +21,7 @@ jobs:
             excludes:
               - node-version: 18
                 os-version: macos-latest
-          fail-fast: true
+          fail-fast: false
         runs-on: ${{matrix.os-version}}
         steps:
           - name: Checkout Code
