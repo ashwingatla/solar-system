@@ -36,11 +36,35 @@ jobs:
             run: npm install
 
           - name: Run Unit Tests
-            run: npm run coverage
+            run: npm run test
           
           - name: Upload Articraft
             uses: actions/upload-artifact@v4
             with:
-              name: Mocha-Test-Result-${{matrix.node-version}}-${{matrix.os-version}}
-              path: test-results.xml
+              name: Code-test-Result-${{matrix.node-version}}-${{matrix.os-version}}
+              path: test-report.xml
               retention-days: 10
+    code-coverage:
+        name: code-coverage
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout-Code
+            uses: actions/checkout@v4
+
+          - name: Install nodejs
+            uses: actions/setup-node@v4
+            with:
+              node-version: 18
+
+          - name: Install Dependencies
+            run: npm install
+          
+          - name: Run unit Coverage
+            run:  npm run coverage
+          
+          - name: Archive Coverage Result
+            uses: actions/upload-artifact@v4
+            with:
+                name: Code-Coverage-Test
+                path: coverage
+                retention-days: 14
