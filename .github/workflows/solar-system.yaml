@@ -43,3 +43,4 @@ jobs:
             with:
               name: Mocha-Test-Result-${{matrix.node-version}}-${{matrix.os-version}}
               path: test-results.xml
+              retention-days: 10
