@@ -47,6 +47,7 @@ jobs:
     code-coverage:
         name: code-coverage
         runs-on: ubuntu-latest
+        continue-on-error: true
         steps:
           - name: Checkout-Code
             uses: actions/checkout@v4
@@ -64,7 +65,6 @@ jobs:
           
           - name: Archive Coverage Result
             uses: actions/upload-artifact@v4
-            continue-on-error: true
             with:
                 name: Code-Coverage-Test
                 path: coverage
