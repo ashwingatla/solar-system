@@ -19,7 +19,7 @@ jobs:
             node-version: ['18','19']
             os-version: [ubuntu-latest, macos-latest]
             excludes:
-              - node-version: 18
+              - node-version: '18'
                 os-version: macos-latest
           fail-fast: false
         runs-on: ${{matrix.os-version}}
