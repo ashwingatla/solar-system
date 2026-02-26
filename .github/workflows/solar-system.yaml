@@ -43,7 +43,8 @@ jobs:
             run: npm run test
           
           - name: Upload Articraft
-            if: steps.unit-test-run.outcome == 'failure' || steps.unit-test-run.outcome == 'success'
+            #if: steps.unit-test-run.outcome == 'failure' || steps.unit-test-run.outcome == 'success'
+            if: always()
             uses: actions/upload-artifact@v4
             with:
               name: Code-test-Result-${{matrix.node-version}}-${{matrix.os-version}}
